@@ -4,49 +4,36 @@
 #include "math.h"
 #include "time.h"
 
-//用函数表示二分查找值
-int binary_search(int arr[], int i, int sz) //这个地方的arr是主函数数组的首元素的地址，本质上这里的arr是指针.出现的问题：err后没有加[]导致无法运行。
+//实现一个冒泡排序函数将一个整形数组排序。
+void bubble_sort(int arr[], int sz)
 {
-    //int sz = sizeof(arr) / sizeof(arr[0]); //得到元素个数在函数中无法计算，既在主函数计算
-    int left = 0;
-    int right = sz - 1;
-
-    while (left <= right)
+    int i = 0;
+    //sz=sizeof(arr)/sizeof(arr[0]);//在函数内并不能你求出arr长度，在主函数内可以求出
+    for (i = 0; i < sz - 1; i++) //需要进行sz-1趟冒泡排序
     {
-        int mid = (left + right) / 2;
-
-        if (arr[mid] < i)
+        //每一趟冒泡排序的内容
+        int a = 0;
+        for (a = 0; a < sz - 1 - i; a++)
         {
-            left = mid + 1;
-        }
-        else if (arr[mid] > i)
-        {
-            right = mid - 1;
-        }
-        else
-        {
-            return mid;
+            if (arr[a] > arr[a + 1])
+            {
+                int b = arr[a];
+                arr[a] = arr[a + 1];
+                arr[a + 1] = b;
+            }
         }
     }
-    return -1;
 }
 
 int main()
 {
-    //在一个有序数组中查找某一个数，
-    //查找到值返回对应数到下标，没有找到返回-1
-    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    int i = 6;
+    int arr[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
     int sz = sizeof(arr) / sizeof(arr[0]);
-    int ret = binary_search(arr, i, sz); //二分查找到意思，即为函数名
-    if (ret == -1)
+    int i = 0;
+    bubble_sort(arr,sz); //冒泡排序
+    for (i = 0; i < sz; i++)
     {
-        printf("没有找到对应的数值。\n");
+        printf("%d, ", arr[i]);
     }
-    else
-    {
-        printf("对应数值的下标为%d\n", ret);
-    }
-
     return 0;
 }

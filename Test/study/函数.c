@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS 1
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
@@ -6,7 +7,7 @@
 //函数库搜索了解网址：cplusplus.com。可以直接进入网址了解函数的名称意义等内容。
 //同上还有一个网址：cppreference.com。分中英文，在前面家zh或en。
 
-//
+
 //求第n个斐波那契数。（不考虑溢出）斐波那契数列：前两个数之和等于第三个数。
 //描述第n个斐波那契数的公式。当n<2时，n=1。当n>2时，第n个等于(n-1)+(n-2)。
 //递归的方式
@@ -98,7 +99,7 @@ int main()
     return 0;
 }
 
-
+/*
 //递归
 //编写函数，不允许创建临时变量，求字符串长度。
 int my_strlen(char *str) //str为指针变量！！ 为第一种长度计算方法，但是中间还是存在临时变量

@@ -4,6 +4,153 @@
 #include "math.h" //数学库函数
 
 
+//求第n个斐波那契数。（不考虑溢出）斐波那契数列：前两个数之和等于第三个数。
+//描述第n个斐波那契数的公式。当n<2时，n=1。当n>2时，第n个等于(n-1)+(n-2)。
+//递归的方式
+int fib(int i) //计算过于臃肿，屏蔽掉
+{
+    int a = 1;
+    if (i <= 2)
+    {
+        return 1;
+    }
+    else
+    {
+        //return i = fib(i - 1) + fib(i - 2);  这里会改变i的值，使得后面的fib不在准确。
+        return fib(i - 1) + fib(i - 2);
+    }
+}
+//迭代
+int fib1(int i)
+{
+    int a = 1;
+    int b = 1;
+    int c = 1;
+
+    while (i > 2)
+    {
+        c = a + b;
+        a = b;
+        b = c;
+        i--;
+    }
+    return c;
+}
+int main()
+{
+    int i = 0;
+    int a = 0;
+    scanf("%d", &i);
+
+    //fib(i);
+    // a = fib(i);
+    // printf("%d\n", a);
+    // printf("%d\n", fib(i));
+    printf("%d\n", fib1(i)); //打印fib1方式求的值
+
+    return 0;
+}//i过大，结果会溢出，造成结果为负值等错误。
+
+/*
+//递归加上循环
+//求出n的阶乘，不考虑溢出
+int fac1(int i)
+{
+    int a = 0;
+    int b = 1;//b的初始值为1，这样下面的乘积才能正确。
+    for (a = 1; a <= i; a++)
+    {
+        b *= a;
+    }
+
+    return b;
+}
+int fac2(int i)//方法2，当n<=1时，n的阶乘就是1，当n>1时，n的阶乘就是n*(n-1)。
+{
+    if (i<=1)
+    {
+        return i;
+    }
+    else
+    {
+        i*=fac2(i-1);
+        return i;
+    }
+    
+    return 0;
+}
+int main()
+{
+    int i = 0;
+    int a = 0;
+    int b = 0;
+    scanf("%d", &i);
+    fac1(i); //求阶乘的第一种方式
+    a = fac1(i);
+    printf("%d\n", a);
+    fac2(i);
+    b = fac2(i);
+    printf("%d\n", b);
+
+    return 0;
+}
+
+
+//递归
+//编写函数，不允许创建临时变量，求字符串长度。
+int my_strlen(char *str) //str为指针变量！！ 为第一种长度计算方法，但是中间还是存在临时变量
+{
+    int a = 0;
+    while (*str != '\0') //出现编写错误，将str改为char会提示char不是错误
+    {
+        a++;
+        str++;
+    }
+    return a;
+}
+int my_strlen1(char *str)
+{
+    if (*str != '\0')
+    {
+        return 1 + my_strlen1(str + 1);
+    }
+    else
+        return 0; //当此处返回值为1时，其总的字符串长度会加1.(原因是放if执行完后会继续执行return，导致值上加)
+}
+
+int main()
+{
+    char arr[] = "bit";
+    scanf("%s", &arr);
+    int len = my_strlen(arr); //arr事数组，数值传参，传过去的不是整个数值，而是第一个元素的地址
+    int len1 = my_strlen1(arr);
+    printf("字符串长度为%d\n", len);
+    printf("字符串长度为%d\n", len1);
+
+    return 0;
+}
+
+
+//递归
+//输入一个整形值（无符号），按照顺序打印它的每一位。例如：输入1234，打印：1 2 3 4.
+void print(int n)
+{
+    if (n > 9)
+    {
+        print(n / 10);
+    }
+    printf("%d ", n % 10);
+}
+int main()
+{
+    unsigned int num = 0;
+    scanf("%d", &num); //输入1234
+    //递归
+    print(num);
+
+    return 0;
+}
+
 /* 
 //*********函数的声明和定义*********
 //函数的声明
